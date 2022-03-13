@@ -34,8 +34,6 @@ def getNeighbors(matrix,blockOrigin):
         Regresa las casillas vecinas a partir del origen, 
         filtrando las que no son validas
     """
-    # Nota ::: se puede reducir usando los rangos en los arreglos
-
     # Casillas vecinas
     neighbors = []
 
@@ -56,7 +54,7 @@ def getNeighbors(matrix,blockOrigin):
     else:
          corteInicialFilas = cornerLeftTop['y']
     if cornerLeftTop['y'] + 2 >= limitMatrix_Y:
-        corteFinalFilas = limitMatrix_Y - 1
+        corteFinalFilas = limitMatrix_Y
     else:
         corteFinalFilas = corteInicialFilas + 3
     if cornerLeftTop['y'] + 1 == 0:
@@ -76,7 +74,7 @@ def getNeighbors(matrix,blockOrigin):
     else: 
         corteInicialColumnas = cornerLeftTop['x']
     if cornerLeftTop['x'] + 2 >= limitMatrix_X:
-        corteFinalColumnas = limitMatrix_X - 1
+        corteFinalColumnas = limitMatrix_X
     else:
         corteFinalColumnas = corteInicialColumnas + 3
     if cornerLeftTop['x'] + 1 == 0:

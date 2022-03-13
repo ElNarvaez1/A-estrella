@@ -19,6 +19,10 @@ y tambien algunas clases.
 
 ### Nota 2....
 En el código hay cosas que dicen `Nota:: ...` o algo por el estilo, eso significa que esa seccion de codigo se puede mejorar o se puede cambiar por cualquier otra, para hacer el algoritmo mas eficiente.
+____
+## Bugs 
+** Crea saltos que no deberias ser.
+* Desde K-Y, el camino realizado es,  Y,S,W,Q,K
 ___
 :tw-1f47f: Narvaez Ruiz Alexis
 

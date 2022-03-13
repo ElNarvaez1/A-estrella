@@ -51,7 +51,7 @@ for y in range(len(matriz)):
 
 # Definimos el origien y el destino
 origen =  matriz[2][0] # Casilla k
-destino =  matriz[2][4] # Casilla o
+destino =  matriz[4][4] # Casilla Y
 # Listas que necesita el programa
 listAvailable = []
 listUnavailable = []
@@ -106,13 +106,8 @@ while position != destino:
 
     # Asignamos la siguiente casilla como punto de origen
     position = nextBlock 
-        
 
-
-
-
-
-# Bucles para asignar las coordenadas
+# 
 for y in range(len(listUnavailable)):
     print(listUnavailable[y])
     
