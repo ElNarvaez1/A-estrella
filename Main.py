@@ -61,10 +61,10 @@ position = None
 # Repite mientras no hayas llegado al destino
 position  = origen
 while position != destino:
-    #Ingresamaos la posicion actual a la lista cerrada.
+    # Ingresamaos la posicion actual a la lista cerrada.
     listUnavailable.append(position)
     
-    # Necesitamos quitar de la lista abierta el elmento que ya se encuentra en la 
+    # Necesitamos quitar de la lista abierta el elemento que ya se encuentra en la 
     # lista cerrada
     if position in listAvailable:
         listAvailable.remove(position)

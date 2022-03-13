@@ -64,10 +64,6 @@ def getNeighbors(matrix,blockOrigin):
 
     # -------------------------------------------------------------------------------------------------------
 
-
-
-
-
     # Cortamos las filas 
     filas = matrix[corteInicialFilas:corteFinalFilas]
 
@@ -85,8 +81,6 @@ def getNeighbors(matrix,blockOrigin):
         corteFinalColumnas = corteInicialColumnas + 3
     if cornerLeftTop['x'] + 1 == 0:
         corteFinalColumnas = 2
-
-
 
     for fila in filas:
         # Fila es un arreglo
