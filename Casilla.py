@@ -74,10 +74,11 @@ class Casilla():
     def getH(self):
         return self.__H
 
-    def setF(self,newF):
-        self.__F = newF
+    # def setF(self,newF):
+    #    self.__F = newF
 
     def getF(self):
+        self.__F = self.__G + self.__H
         return self.__F
 
     def __str__(self):

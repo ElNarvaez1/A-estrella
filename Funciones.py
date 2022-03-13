@@ -1,5 +1,6 @@
 # Funciones de calculo y comprobacion que necesita el algoritmo.
 
+from operator import contains
 from Casilla import Casilla 
 
 # Hay que cambiarle el nombre XD
@@ -39,23 +40,59 @@ def getNeighbors(matrix,blockOrigin):
     neighbors = []
 
     # Limites de la matriz
-
     limitMatrix_X = len(matrix[0])
     limitMatrix_Y = len(matrix)
     
-    positionOriginX = blockOrigin.getX() 
-    positionOriginY = blockOrigin.getY()
-    
     # Esquina superior izquierda  
-    cornerLeftTop = {'x':positionOriginX - 1, 'y':positionOriginY - 1}
-    for yTemp in range(cornerLeftTop['y'],cornerLeftTop['y'] + 3):
-        for xTemp in range(cornerLeftTop['x'],cornerLeftTop['x'] + 3):
-            # Necesitamos comprobar, si el origen puede tener casillas a la izquierda, 
-            # sin desbordarse
-            if (xTemp < limitMatrix_X) and (xTemp >= 0):
-                if (yTemp < limitMatrix_Y) and (yTemp >= 0):
-                    # Esta dentro del rango que puede ser admitido
-                    neighbors.append(matrix[yTemp][xTemp])
+    cornerLeftTop = {'x':blockOrigin.getX() - 1,
+                     'y':blockOrigin.getY() - 1}
+    
+    # Cortamos la matriz principal 
+    corteInicialFilas = 0
+    corteFinalFilas = 0
+
+    if cornerLeftTop['y'] < 0:
+         corteInicialFilas = 0
+    else:
+         corteInicialFilas = cornerLeftTop['y']
+    if cornerLeftTop['y'] + 2 >= limitMatrix_Y:
+        corteFinalFilas = limitMatrix_Y - 1
+    else:
+        corteFinalFilas = corteInicialFilas + 3
+    if cornerLeftTop['y'] + 1 == 0:
+        corteFinalFilas = 2
+
+    # -------------------------------------------------------------------------------------------------------
+
+
+
+
+
+    # Cortamos las filas 
+    filas = matrix[corteInicialFilas:corteFinalFilas]
+
+    # Calculamos el corte en las columnas
+    corteInicialColumnas = 0
+    corteFinalColumnas = 0
+
+    if cornerLeftTop['x'] < 0:
+        corteInicialColumnas = 0
+    else: 
+        corteInicialColumnas = cornerLeftTop['x']
+    if cornerLeftTop['x'] + 2 >= limitMatrix_X:
+        corteFinalColumnas = limitMatrix_X - 1
+    else:
+        corteFinalColumnas = corteInicialColumnas + 3
+    if cornerLeftTop['x'] + 1 == 0:
+        corteFinalColumnas = 2
+
+
+
+    for fila in filas:
+        # Fila es un arreglo
+        elementos = fila[corteInicialColumnas:corteFinalColumnas] 
+        for e in elementos:
+            neighbors.append(e)
 
     #Filtramos las casillas que "SI" esten disponibles
     neighbors = filter(lambda block: block.getRol() is not Casilla.ROL_BLOQUEADO, neighbors)
@@ -72,11 +109,6 @@ def filterTo(list1,list2):
     """
     listNew = []
     for elemento in list1:
-        temp = False
-        for elementoList2 in list2:
-            if (elemento.getKey() == elementoList2.getKey()):
-                temp = True
-                break
-        if not temp:
+        if elemento not in list2 :
             listNew.append(elemento)
     return listNew

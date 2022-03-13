@@ -51,7 +51,7 @@ for y in range(len(matriz)):
 
 # Definimos el origien y el destino
 origen =  matriz[2][0] # Casilla k
-destino =  matriz[4][4] # Casilla y
+destino =  matriz[2][4] # Casilla o
 # Listas que necesita el programa
 listAvailable = []
 listUnavailable = []
@@ -60,23 +60,18 @@ position = None
 
 # Repite mientras no hayas llegado al destino
 position  = origen
-while True:
-    if (position == destino):
-        break
+while position != destino:
     #Ingresamaos la posicion actual a la lista cerrada.
     listUnavailable.append(position)
     
     # Necesitamos quitar de la lista abierta el elmento que ya se encuentra en la 
     # lista cerrada
-    posicionCerrada = -1
-    if(len(listAvailable) > 0 ):
-        posicionCerrada = listAvailable.index(position)# Lista abierta
-    if (posicionCerrada >= 0):
+    if position in listAvailable:
         listAvailable.remove(position)
 
     # Seleccionamos lo vecinos 
     vecinos = getNeighbors(matriz,position)
-    # Aqui es donde necesitamos quitar a los vecinos que, ya que 
+    # Aqui es donde necesitamos quitar a los vecinos que 
     # ya esten en la lista cerrada
     vecinos = filterTo(vecinos,listUnavailable)
 
@@ -85,7 +80,8 @@ while True:
 
     for casilla in vecinos:
         # Agregamos el vecino a la lista abierta
-        listAvailableTemp.append(casilla)
+        if casilla not in listAvailable:
+            listAvailable.append(casilla)
 
         # Preguntamos si no tiene una casilla de origen 
         if (casilla.getOrigin() is None):
@@ -98,23 +94,7 @@ while True:
 
             distancia = getNumberBlockDistance(casilla,destino)
             casilla.setH(Casilla.PASO*distancia)
-            casilla.setF(casilla.getG()+casilla.getH())
-    # Necesitamos ingresar los elmentos que no se encuentren en la losta abierta
-    # .... debemos de seleccionarlos desde la losta abierta temporal
-
-    # Filtramos los elementos que no estan en la lista abierta principal
-    if len(listAvailable) == 0:
-        listAvailable = listAvailable + listAvailableTemp 
-    else:
-        for elememtoListAbiertaTemporal in listAvailableTemp:
-            temp = False
-            for elementoListAbiertOriginal in listAvailable:
-                if (elementoListAbiertOriginal.getKey() == elememtoListAbiertaTemporal.getKey()):
-                    # Significa que si esta, en la lista original
-                    temp = True 
-                    break
-            if not temp:
-                listAvailable.append(elememtoListAbiertaTemporal)
+            # casilla.setF(casilla.getG()+casilla.getH())
 
     # Necesitamos saber cual de los elmentos de la lista abierta
     # tiene la "F"  menor
